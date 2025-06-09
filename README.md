@@ -1,7 +1,7 @@
 
 # Tic Tac Toe (Web App)
 
-A two-player Tic Tac Toe web app game built with **Python** and **Flask**. It will be playable in the browser. Players can enter their names and play tic tac toe on a clickable grid, and see the winner displayed by name — all on a single page.
+A two-player Tic Tac Toe web app game built with **Python** and **Flask**. It will be playable in the browser. Players can enter their names and play tic tac toe on a clickable grid, and the winner's name is displayed at the end — all on a single page.
 
 ---
 
