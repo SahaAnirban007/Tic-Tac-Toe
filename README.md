@@ -37,4 +37,4 @@ tic_tac_toe/
 
   
 
-The Web app is deployed in Render.com. Link: https://tic-tac-toe-play-9yh0.onrender.com/.
+The Web app is deployed in Render.com. Link: (https://tic-tac-toe-play-sooi.onrender.com).
