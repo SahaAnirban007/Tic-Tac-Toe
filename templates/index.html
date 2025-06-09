@@ -1,40 +1,88 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Tic Tac Toe</title>
+    <title>Play Tic Tac Toe</title>
     <style>
-        body { font-family: Arial; text-align: center; }
-        .board { display: grid; grid-template-columns: repeat(3, 100px); margin: 20px auto; gap: 5px; }
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 5px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
         .cell {
-            width: 100px; height: 100px;
+            width: 100px;
+            height: 100px;
             font-size: 32px;
-            display: flex; align-items: center; justify-content: center;
-            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #444;
             cursor: pointer;
         }
-        .cell.taken { background-color: #f0f0f0; cursor: not-allowed; }
-        .winner { font-size: 24px; color: green; margin-top: 20px; }
-        a { display: inline-block; margin-top: 10px; text-decoration: none; }
+
+        .cell.taken {
+            background: #eee;
+            cursor: not-allowed;
+        }
+
+        .winner {
+            font-size: 24px;
+            color: green;
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
     </style>
 </head>
+
 <body>
     <h1>Tic Tac Toe</h1>
+
+    {% if not player_x or not player_o %}
+    <form method="POST">
+        <input type="text" name="player_x" placeholder="Player X Name" required>
+        <input type="text" name="player_o" placeholder="Player O Name" required>
+        <br><br>
+        <button type="submit">Start Game</button>
+    </form>
+    {% else %}
     {% if winner %}
-        <div class="winner">{{ winner }} wins!</div>
-        <a href="{{ url_for('reset') }}">Play Again</a>
+    <div class="winner">{{ player_x if winner == 'player_x' else player_o }} wins!</div>
     {% endif %}
-    <div class="board">
-        {% for i in range(9) %}
-            {% set symbol = 'X' if xState[i] else ('O' if zState[i] else '') %}
-            <div class="cell {{ 'taken' if symbol else '' }}"
-                 onclick="location.href='{{ url_for('play', cell=i) }}'">
-                 {{ symbol }}
-            </div>
-        {% endfor %}
-    </div>
+    <form method="POST">
+        <div class="board">
+            {% for i in range(9) %}
+            {% set symbol = 'X' if x_position[i] else ('O' if z_position[i] else '') %}
+            <button type="submit" name="cell" value="{{ i }}" class="cell {% if symbol %}taken{% endif %}" {% if symbol
+                or winner %}disabled{% endif %}>
+                {{ symbol }}
+            </button>
+            {% endfor %}
+        </div>
+    </form>
     {% if not winner %}
-        <p>{{ 'X' if turn else 'O' }}'s Turn</p>
-        <a href="{{ url_for('reset') }}">Reset Game</a>
+    <p>{{ player_x if turn else player_o }}'s Turn ({{ 'X' if turn else 'O' }})</p>
+    {% endif %}
+    <a button type="button" class="btn btn-outline-primary" href="{{ url_for('reset') }}">Reset Game</a>
     {% endif %}
 </body>
+
 </html>
