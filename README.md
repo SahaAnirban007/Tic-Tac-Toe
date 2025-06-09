@@ -17,4 +17,3 @@ tic_tac_toe/
 
 ## Deployment
 
-This web app will been deployed. 
